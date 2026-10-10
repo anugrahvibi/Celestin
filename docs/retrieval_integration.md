@@ -100,11 +100,10 @@ punctuation-only queries return empty results. Missing/incompatible FTS tables
 raise `SearchIndexUnavailable`; database and repository errors propagate
 rather than becoming successful empty results.
 
-The MCP branch's mock search handler currently returns a
-`{"project", "query", "results"}` envelope, while this retrieval operation
-returns the requested `list[dict]`. Member 3 can wrap the list at the MCP
-boundary if that envelope remains the agreed tool contract. No MCP server
-handler was changed as part of this integration.
+The retrieval operation returns a `list[dict]`. The production MCP
+`RetrievalServices.search_chat_history` adapter wraps that list in the public
+`{"project", "query", "results"}` envelope; the MCP tool contract is
+documented in `docs/interfaces.md`.
 
 ## Tests
 
